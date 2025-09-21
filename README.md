@@ -1,92 +1,180 @@
-# SmartFleet-AI
- Gen AI-Powered Intelligent Bus Management
- 
-🚍 SmartFleet AI – Gen AI Powered Intelligent Bus Management
 
-SmartFleet AI is a Gen AI-powered centralized fleet management system** for government/KSRTC buses. It uses real-time ticket machine data and Gen AI APIs to predict bus occupancy, optimize bus allocation, and dynamically shuffle passengers. This ensures fuel savings, efficient resource usage, and better passenger experience.
+# SmartFleet AI – Intelligent Bus Allocation & Passenger Management
 
+SmartFleet AI is a **Gen AI–powered smart transport management system** designed to optimize public bus services.  
+It integrates **real-time passenger data** (via ticket machines), **AI-driven predictions** (using Google Vertex AI / OpenAI APIs), and **automated bus allocation** with microservices.  
 
-📌 Problem Statement
+The system reduces **fuel wastage**, ensures **better passenger convenience**, and enables governments or KSRTC to **centralize fleet control**.  
 
-Public bus services lack real-time occupancy tracking and AI-driven fleet allocation, leading to:
+---
 
-* Wastage of fuel due to half-empty buses.
-* Overcrowding during high-demand routes.
-* Poor passenger experience due to uncertainty in seat availability.
+## Problem Statement
+Public bus services currently face challenges due to:
+- Underutilized buses running with very few passengers.  
+- Fuel wastage from parallel buses with low occupancy.  
+- Lack of predictive insights for seat booking and demand at stops.  
+- Poor visibility and control for government fleet managers.  
 
+---
 
-🎯 Solution
+## Objectives
+- Enable **real-time passenger count tracking** via IoT-enabled ticket machines.  
+- Predict occupancy levels and demand at each stop using **Gen AI APIs**.  
+- **Allocate or shuffle buses dynamically** based on passenger flow.  
+- Provide **mobile pre-booking** with AI-driven demand forecasting.  
+- Offer a **centralized dashboard** for transport authorities.  
 
-SmartFleet AI integrates Gen AI APIs with real-time passenger and route data to:
+---
 
-1. Predict occupancy for upcoming bus stops.
-2. Dynamically allocate or merge buses.
-3. Provide AI-guided instructions to passengers on which bus to board.
-4. Notify transport authorities about fleet optimization opportunities.
+## Unique Selling Proposition (USP)
+Unlike traditional bus tracking apps, **SmartFleet AI** combines:
+- Real-time passenger data  
+- AI-driven fleet allocation  
+- Predictive demand planning  
 
+to **save fuel, reduce costs, and enhance efficiency** in public transport.  
 
-🌟 Unique Selling Proposition (USP)
+---
 
-AI-driven decision making instead of static scheduling.
-Passenger shuffling guidance in real time.
-Fuel optimization through smart allocation.
-Predictive pre-booking insights for passengers.
-  
-🚀 Features
+## Features
+- Real-time passenger count (via ticket machines)  
+- AI-driven bus allocation (Vertex AI / OpenAI API)  
+- Passenger pre-booking with demand forecasting  
+- Centralized Admin Dashboard (KSRTC/Govt.)  
+- Notifications for passengers & drivers  
+- Scalable microservices with **Nest.js + RabbitMQ**  
+- Mobile-first design (Flutter for passengers, React.js dashboard for admins)  
 
-* Real-time passenger count from ticket machines.
-* AI-powered bus occupancy prediction.
-* Dynamic bus merging & allocation.
-* Passenger pre-booking with predicted seat availability.
-* Notifications for passengers and operators.
-* Analytics dashboard for authorities.
+---
 
- 🔄 Process Flow
-Ticket Machine → Real-Time Passenger Count
-        ↓
-       GPS + Route Data
-        ↓
-Central Data Hub (Cloud)
-        ↓
-Gen AI API Engine
-   - Predict occupancy
-   - Suggest allocation & passenger shuffle
-        ↓
-Bus Allocation System
-   - Merge / Add buses
-   - Notify passengers
-        ↓
-Passenger App / Admin Dashboard
+## System Architecture
 
- 🖼 Architecture
+![Architecture Diagram](./docs/architecture.png)
 
-Frontend: Flutter / React (Passenger & Admin apps)
-Backend: FastAPI / Node.js
-Database: Cloud SQL / Firebase Firestore
-AI Layer: Google Cloud Vertex AI / OpenAI API for reasoning & predictions
-Integration: WebSocket / REST APIs for ticket machine + GPS data
-Notifications: Firebase Cloud Messaging / Twilio SMS
+**Key Components:**
+1. **Frontend**
+   - Passenger Mobile App (Flutter)
+   - Admin Dashboard (React.js with Nx)
 
+2. **Backend (Nest.js Microservices)**
+   - Auth Service – login, JWT, roles  
+   - Passenger Service – bookings, seat allocation  
+   - Fleet Service – bus management  
+   - Notification Service – push/SMS/Email  
+   - IoT Service – ticket machine & GPS data  
+   - **AI Decision Service** – Gen AI brain for predictions and allocations  
 
- 🛠 Technologies Used
+3. **Message Broker**
+   - RabbitMQ for inter-service communication  
 
-Google Cloud AI / OpenAI APIs (for Gen AI reasoning)
-FastAPI / Node.js (Backend APIs)
-Flutter / React (Frontend apps)
-Firebase / Cloud SQL (Database)
-IoT ticket machine integration (Passenger count data)
+4. **Database**
+   - Cloud SQL / Firestore for persistence  
+   - Redis for real-time caching  
 
+5. **AI Layer**
+   - Google Cloud Vertex AI / OpenAI API for predictive demand planning  
 
+---
 
-💰 Estimated Implementation Cost (Prototype)
-
-Google Cloud Vertex AI / OpenAI API usage: ₹4,150 – ₹8,300
-Cloud SQL / Firestore storage: ₹830 – ₹1,660
-Mobile app hosting: ₹415 – ₹830
-Total Estimated Prototype Cost: ₹5,400 – ₹10,800
+## File Structure
 
 
 
+smartfleet-ai/
+│
+├── frontend/
+│   ├── passenger-app/               # Flutter app
+│   ├── admin-dashboard/             # React.js (Nx) dashboard
+│
+├── backend/
+│   ├── apps/
+│   │   ├── auth-service/            # Authentication
+│   │   ├── passenger-service/       # Bookings, seats
+│   │   ├── fleet-service/           # Fleet allocation
+│   │   ├── notification-service/    # Alerts
+│   │   ├── iot-service/             # IoT integration
+│   │   ├── ai-decision-service/     # AI decision making
+│   │   │   ├── src/
+│   │   │   │   ├── models/          # AI models, prompt templates
+│   │   │   │   ├── services/        # Vertex AI / OpenAI integration
+│   │   │   │   ├── controllers/     # APIs for predictions
+│   │   │   │   └── utils/           # Helpers
+│   │   │   └── README.md            # AI service docs
+│   │
+│   ├── libs/                        # Shared DTOs, utils
+│   ├── rabbitmq/                    # Queue setup
+│   ├── docker/                      # Service Docker configs
+│
+├── database/
+│   ├── migrations/                  # DB schemas
+│   ├── seeds/                       # Sample data
+│
+├── docs/
+│   ├── architecture.png             # Architecture diagram
+│   ├── process-flow\.png             # Process flow diagram
+│   ├── ai-pipeline.png              # AI decision pipeline
+│   ├── wireframes/                  # App & dashboard mockups
+│
+├── deployment/
+│   ├── docker-compose.yml           # Local setup
+│   ├── k8s/                         # Kubernetes manifests
+│
+├── .env.example                     # Example env variables
+├── README.md                        # Project documentation
+└── LICENSE
 
+
+
+## Process Flow
+
+![Process Flow](./docs/process-flow.png)
+
+1. Passenger books a seat → Passenger Service updates DB.  
+2. Ticket machine sends **real-time occupancy data** → IoT Service forwards to Fleet Service.  
+3. Fleet Service requests **AI Decision Service** → AI predicts demand & recommends allocation.  
+4. Fleet Service triggers RabbitMQ → Notification Service alerts drivers/passengers.  
+5. Admin Dashboard shows real-time occupancy, predictions & allocations.  
+
+---
+
+## AI Decision Service (Core Gen AI Brain)
+- Collects **inputs**: passenger counts, pre-bookings, GPS, bus routes.  
+- Sends data to **Google Vertex AI / OpenAI APIs** with custom prompt templates.  
+- Returns:  
+  - Merge low-occupancy buses (fuel saving).  
+  - Allocate new bus if demand > capacity.  
+  - Predict demand at upcoming stops for proactive planning.  
+
+---
+
+## Technologies Used
+- **Frontend**: Flutter (Passenger App), React.js + Nx (Dashboard)  
+- **Backend**: Nest.js (Microservices)  
+- **Message Broker**: RabbitMQ  
+- **Database**: Cloud SQL / Firestore + Redis  
+- **AI Layer**: Google Vertex AI / OpenAI APIs  
+- **Deployment**: Docker, Kubernetes, Google Cloud Run  
+
+---
+
+## Estimated Implementation Cost
+- Google Cloud Vertex AI / OpenAI APIs: **₹4,000 – ₹8,000/month**  
+- Cloud SQL / Firestore: **₹800 – ₹1,600/month**  
+- Hosting & Infrastructure: **₹400 – ₹1,200/month**  
+- **Total Prototype Cost: ~₹5,400 – ₹10,800/month**  
+
+---
+
+## Submission Deliverables
+- Prototype PPT (PDF format)  
+- Working Prototype Link  
+- Demo Video (Google Drive link with open access)  
+- Public GitHub Repository  
+
+---
+
+## Contact
+For queries, contact: **prathampshetty99sai@gmail.com**
+```
 
 
