@@ -49,7 +49,7 @@ to **save fuel, reduce costs, and enhance efficiency** in public transport.
 
 ## System Architecture
 
-![Architecture Diagram](./docs/architecture.png)
+![Architecture Diagram](./docs/architecture.jpeg)
 
 **Key Components:**
 1. **Frontend**
