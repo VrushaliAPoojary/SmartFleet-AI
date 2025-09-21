@@ -78,7 +78,7 @@ to **save fuel, reduce costs, and enhance efficiency** in public transport.
 
 ## File Structure
 
-
+```
 
 smartfleet-ai/
 │
@@ -123,7 +123,7 @@ smartfleet-ai/
 ├── README.md                        # Project documentation
 └── LICENSE
 
-
+```
 
 ## Process Flow
 
